@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>InnerSource Software License Generator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+   
+    <h1>InnerSource License Generator</h1>
+
+    <form action="/generate_license" method="POST">
+        <h2>Organization and Copyright holders Details</h2>
+        <p>The Legal organization name represented by project team or employee</p>
+        <input type="text" name="organization_name" style="width: 350px; background-color: lightgrey;" required>
+
+        <h2>Authors Name</h2>
+        <p>The name of the owner of this inner source project</p>
+        <input type="text" name="copyright_holder" style="width: 350px; background-color: lightgrey;" required>
+        <br/>
+
+        <h2>Scope of Protection</h2>
+        <p>What aspect of the InnerSource project needs to be protected</p>
+        <div class="radio-group">
+            <label><input type="checkbox" name="scope[]" value="code"> Code</label>
+            <label><input type="checkbox" name="scope[]" value="docs"> Documentation</label>
+            <label><input type="checkbox" name="scope[]" value="devops"> DevOps</label>
+            <label><input type="checkbox" name="scope[]" value="data"> Data</label>
+        </div>
+
+        <h2>Attribution</h2>
+        <p>Who needs to be provided attribution and recognition for the orginal work?</p>
+        <div class="radio-group">
+            <label><input type="radio" name="attribution" value="noat" required> No attribution</label>
+            <label><input type="radio" name="attribution" value="copyat" required> Attribution to Copyright Holder</label>
+            <label><input type="radio" name="attribution" value="orgat" required> Attribution to Organization</label>
+        </div>
+
+        <h2>ReDistribution</h2>
+        <p>Are you permitted to furter distribute the sourcecode after modification</p>
+        <div class="radio-group">
+            <label><input type="radio" name="distribution" value="noredist" required> No Restribution</label>
+            <label><input type="radio" name="distribution" value="allowredist" required> Redistribution Allowed</label>
+            <label><input type="radio" name="distribution" value="centralredist" required> Redistribution only through main project</label>
+        </div>
+
+        <h2>InnerSource Boundary</h2>
+        <p>You can only distribute this work within the boundary that reprsents</p>
+        <div class="radio-group">
+            <label><input type="radio" name="boundary" value="orgonly" required> Only the Organization and direct employees</label>
+            <label><input type="radio" name="boundary" value="orgsubs" required> Only Organization and Subsidaries</label>
+            <label><input type="radio" name="boundary" value="orgsubsvend" required>  The Organiztion, Subsidaries and Vendors</label>
+        </div>
+
+        <h2>InnerSource Authorizing Body</h2>
+        <p>Which body will handle exceptions and approvals to this InnerSource project</p>
+        <div class="radio-group">
+            <label><input type="radio" name="authbody" value="OSPO" required> OSPO</label>
+            <label><input type="radio" name="authbody" value="ISC" required> InnerSource Committee</label>
+            <label><input type="radio" name="authbody" value="Other" required> Other</label>
+            <input type="text" name="Authbody_name">        
+        </div>
+
+        <h2>Support</h2>
+        <p>What warrenty or support will they get by using the product?</p>
+        <div class="radio-group">
+            <label><input type="radio" name="warranty" value="asis" required> As-Is No Support</label>
+            <label><input type="radio" name="warranty" value="security" required> Security Fixes</label>
+            <label><input type="radio" name="warranty" value="bug" required> Bug Fixes</label>
+        </div>
+
+        <br><br>
+        <input type="submit" value="Generate License">
+    </form>
+</body>
+</html>

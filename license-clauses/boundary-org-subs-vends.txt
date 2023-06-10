@@ -1,0 +1,11 @@
+
+BOUNDARY 
+--------
+
+The license grants the right to distribute the software within the organization,
+its employees, any subsidiaries, and their employees, as well as any contractors
+who have a legal contract with the organization. However, in the event that a
+contractor's contract with the organization terminates, the contractor is
+required to remove any copies of the software from their possession and return
+any code or related materials to the organization.
+

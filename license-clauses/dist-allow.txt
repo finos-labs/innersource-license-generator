@@ -1,0 +1,27 @@
+
+DISTRIBUTION 
+------------
+
+Redistribution of modified versions of the software is permitted, subject to the
+following conditions:
+
+1. Redistributions must retain the original copyright notice and disclaimer. 
+
+2.Redistributions must include a prominent notice stating that the software has
+been modified from the original version. 
+
+3. Redistributions must clearly identify the modifications made, including any
+changes to the source code. 
+
+4. Redistributions must not imply any endorsement or affiliation with the
+original authors or contributors. 
+
+5. Redistributions must not use the names of the original authors or
+contributors to endorse or promote the modified software without prior written
+permission. 
+
+6. Redistributions must not remove or alter any existing license notices or
+disclaimers.
+
+
+

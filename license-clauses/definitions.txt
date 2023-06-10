@@ -1,0 +1,52 @@
+
+DEFINITIONS
+-----------
+
+1.1. "License" refers to the legal permission granted by the Licensor to the 
+Licensee to use, modify, and distribute the licensed software or other 
+copyrighted works as specified under the terms of this Agreement.
+
+1.2. "Licensor" refers to [Your Organization's Name], the owner or authorized 
+entity that grants the Licensee the rights to use, modify, and distribute the 
+licensed software or copyrighted works.
+
+1.3. "Copyright" refers to the legal protection granted to the original works 
+of authorship, including software code, literary works, artistic creations, 
+and other intellectual property rights, as provided by applicable laws.
+
+1.4. "Copyright Holder" refers to the individual or entity that owns the 
+copyright to the licensed software or copyrighted works.
+
+1.5. "Derivative Work" refers to a work based upon one or more preexisting 
+works, such as modifications, translations, adaptations, or any other form 
+of alteration made to the original work.
+
+1.6. "Distribution" refers to the act of making copies or reproductions of the
+ licensed software or copyrighted works, either in original or modified form, 
+ and providing them to third parties.
+
+1.7. "Organization Boundary" refers to the dividing line between the 
+Orginizations internal only distribution and any unauthorized
+external distribution of the InnerSource content
+
+1.8. "Inner Source Code" refers to the source code developed or modified 
+within the boundaries of the licensed software or copyrighted works, which may
+ include contributions made by the Licensee or its subsidiaries or partners.
+
+1.9. "Contribution" refers to any modification, enhancement, translation, 
+adaptation, or any other form of alteration made to the licensed software or 
+copyrighted works by the Licensee or its subsidiaries or partners.
+
+1.10. "Licensee" refers to the individual or entity that accepts the terms of
+this Agreement and is granted the rights to use, modify, and distribute the 
+licensed software or copyrighted works in accordance with the License granted 
+by the Licensor.
+
+1.11. "Subsidiaries" refers to any entity that is directly or indirectly 
+controlled by the Licensee through ownership or control of a majority of 
+voting stock or similar ownership interest.
+
+1.12. "Partners" refers to entities that have a partnership, collaboration, 
+or similar formal relationship with the Licensee for the purpose of jointly 
+developing, using, or distributing the licensed software or copyrighted works.
+

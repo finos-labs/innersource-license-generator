@@ -1,0 +1,14 @@
+
+DISTRIBUTION 
+------------
+
+Redistribution of any modified work shall be carried out centrally by the
+copyright holder, through mechanisms of their choice, subject to the following
+conditions:
+
+The copyright holder retains the exclusive right to distribute modified versions
+of the software. Redistribution of modified works can only be done by the
+copyright holder or by individuals or entities expressly authorized by the
+copyright holder in writing. Any redistribution of modified works must be
+accompanied by a written permission or license from the copyright holder.
+

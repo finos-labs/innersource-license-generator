@@ -1,0 +1,11 @@
+
+DISTRIBUTION 
+------------
+
+Redistribution of the modified software, in any form, is strictly prohibited
+without explicit written permission from the copyright holder.
+You may, however, share the unmodified version of the software with others,
+provided that you include a copy of this license and any accompanying
+documentation with such distribution. The copyright holder retains all rights
+not expressly granted under this license.
+

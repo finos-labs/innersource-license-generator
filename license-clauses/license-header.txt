@@ -1,0 +1,7 @@
+LICENSE AGREEMENT (DRAFT)
+=========================
+
+This License Agreement ("Agreement") is entered into between 
+{{organization}} ("Licensor") and the individual or entity 
+accepting the terms herein ("Licensee").
+

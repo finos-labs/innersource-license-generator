@@ -1,0 +1,7 @@
+
+SCOPE
+-----
+
+The scope of protection provided by this license includes the 
+{{scope}} included in the project and distribution only 
+

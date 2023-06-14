@@ -23,9 +23,28 @@
         <div class="radio-group">
             <label><input type="checkbox" name="scope[]" value="code"> Code</label>
             <label><input type="checkbox" name="scope[]" value="docs"> Documentation</label>
-            <label><input type="checkbox" name="scope[]" value="devops"> DevOps</label>
             <label><input type="checkbox" name="scope[]" value="data"> Data</label>
+            <label><input type="checkbox" name="scope[]" value="devops"> All Artifacts</label>
         </div>
+
+        <h2>InnerSource Boundary</h2>
+        <p>You can only distribute this work within the InnerSource boundary that reprsents</p>
+        <div class="radio-group">
+            <label><input type="radio" name="boundary" value="orgonly" required> Only the Organization and direct employees</label>
+            <label><input type="radio" name="boundary" value="orgsubs" required> Only Organization and Subsidaries</label>
+            <label><input type="radio" name="boundary" value="orgsubsvend" required>  The Organiztion, Subsidaries and Vendors</label>
+        </div>
+
+        <h2>Territory</h2>
+        <p>What Territorial Jurasdictions are within the InnerSource boundary </p>
+        <div class="radio-group">
+            <label><input type="checkbox" name="territory[]" value="US"> US</label>
+            <label><input type="checkbox" name="territory[]" value="UK"> UK</label>
+            <label><input type="checkbox" name="territory[]" value="EU"> EU</label>
+            <label><input type="checkbox" name="territory[]" value="Other"> Other</label>
+            <input type="text" name="other_territory">        
+        </div>
+
 
         <h2>Attribution</h2>
         <p>Who needs to be provided attribution and recognition for the orginal work?</p>
@@ -35,24 +54,17 @@
             <label><input type="radio" name="attribution" value="orgat" required> Attribution to Organization</label>
         </div>
 
-        <h2>ReDistribution</h2>
-        <p>Are you permitted to furter distribute the sourcecode after modification</p>
+        <h2>Distribution of Derivative Work</h2>
+        <p>Are you permitted to furter distribute the sourcecode after modification?</p>
         <div class="radio-group">
             <label><input type="radio" name="distribution" value="noredist" required> No Restribution</label>
-            <label><input type="radio" name="distribution" value="allowredist" required> Redistribution Allowed</label>
             <label><input type="radio" name="distribution" value="centralredist" required> Redistribution only through main project</label>
-        </div>
-
-        <h2>InnerSource Boundary</h2>
-        <p>You can only distribute this work within the boundary that reprsents</p>
-        <div class="radio-group">
-            <label><input type="radio" name="boundary" value="orgonly" required> Only the Organization and direct employees</label>
-            <label><input type="radio" name="boundary" value="orgsubs" required> Only Organization and Subsidaries</label>
-            <label><input type="radio" name="boundary" value="orgsubsvend" required>  The Organiztion, Subsidaries and Vendors</label>
+            <label><input type="radio" name="distribution" value="sharealredist" required> Share-Alike Redistribution Allowed</label>
+            <label><input type="radio" name="distribution" value="allowredist" required> Redistribution Allowed</label>
         </div>
 
         <h2>InnerSource Authorizing Body</h2>
-        <p>Which body will handle exceptions and approvals to this InnerSource project</p>
+        <p>Which body will handle exceptions and approvals to this InnerSource project?</p>
         <div class="radio-group">
             <label><input type="radio" name="authbody" value="OSPO" required> OSPO</label>
             <label><input type="radio" name="authbody" value="ISC" required> InnerSource Committee</label>
@@ -60,7 +72,15 @@
             <input type="text" name="Authbody_name">        
         </div>
 
-        <h2>Support</h2>
+        <h2>LLM Access</h2>
+        <p>Are Large Language Model Systems Allowed to Access this InnerSource project</p>
+        <div class="radio-group">
+            <label><input type="radio" name="warranty" value="LLM_noread" required> Not allowed </label>
+            <label><input type="radio" name="warranty" value="LLM_attribution" required> Internal with Attribution</label>
+            <label><input type="radio" name="warranty" value="LLM_allowread" required> Internally Allowed</label>
+        </div>
+
+        <h2>Warrenty and Support</h2>
         <p>What warrenty or support will they get by using the product?</p>
         <div class="radio-group">
             <label><input type="radio" name="warranty" value="asis" required> As-Is No Support</label>

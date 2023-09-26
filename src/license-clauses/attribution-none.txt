@@ -2,7 +2,7 @@
 ATTRIBUTION
 -----------
 
-There will be no attribution of the organiziation or copyright holder can be
+There will be no attribution of the organization or copyright holder can be
 used when redistributing this software or any derived work. All references to
 the content will be under the responsibility liability of the author of the
 derivative works

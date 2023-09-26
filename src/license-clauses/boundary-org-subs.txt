@@ -3,7 +3,7 @@ BOUNDARY
 --------
 
 The software distribution is limited to the organization ("Organization"),
-organiztion subsidaries and its employees ("Employees") exclusively. No other
+organization subsidiaries and its employees ("Employees") exclusively. No other
 individuals or entities are permitted to distribute the software under this
 license. The term "Employees" refers to individuals who are currently employed
 by the Organization and have a contractual agreement with the Organization. Any

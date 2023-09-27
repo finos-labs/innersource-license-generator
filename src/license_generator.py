@@ -8,6 +8,21 @@ THIS_FOLDER = pathlib.Path().resolve()
 LICENSE_CLAUSES_FOLDER = THIS_FOLDER.joinpath("license-clauses")  # templates folder relative to this file
 REQUIRED_FIELDS = ('attribution', 'distribution', 'warranty', 'copyright_holder',
                    'organization_name', 'scope', 'boundary')
+MAX_LENGTH = 1024
+
+
+def sanitize_text(text: str) -> str:
+    return text.replace('\b', '').strip()[:MAX_LENGTH]  # remove backspace, limit length
+
+
+def sanitize_input(form: Dict) -> Dict:
+    result = {}
+    for key, value in form.items():
+        if '[]' in key:
+            result[key.replace('[]', '')] = [sanitize_text(_) for _ in form.getlist(key)]
+        else:
+            result[key] = sanitize_text(value)
+    return result
 
 
 def check_missing_fields(form: Dict) -> List[str]:

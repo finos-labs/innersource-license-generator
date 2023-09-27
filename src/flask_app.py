@@ -1,9 +1,8 @@
 import io
 import os
 from logging.config import dictConfig
-from typing import Dict
 from flask import Flask, render_template, request, send_file, session
-from license_generator import generate_license_text, check_missing_fields
+from license_generator import generate_license_text, check_missing_fields, sanitize_input
 
 
 dictConfig({
@@ -45,20 +44,6 @@ def apply_caching(response):
     response.set_cookie('username', 'flask', secure=True, httponly=True, samesite='Lax')
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
-
-
-def sanitize_text(text: str) -> str:
-    return text.replace('\b', '').strip()  # remove backspace
-
-
-def sanitize_input(form: Dict) -> Dict:
-    result = {}
-    for key, value in form.items():
-        if '[]' in key:
-            result[key.replace('[]', '')] = [sanitize_text(_) for _ in form.getlist(key)]
-        else:
-            result[key] = sanitize_text(value)
-    return result
 
 
 @app.route('/')

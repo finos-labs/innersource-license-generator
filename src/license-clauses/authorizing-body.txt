@@ -1,0 +1,7 @@
+
+AUTHORIZING BODY
+----------------
+
+All violations and exceptions to this license needs to be esculated to the 
+{{authbody}} of the owning organization 
+

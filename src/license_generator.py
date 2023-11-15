@@ -117,13 +117,24 @@ def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
 
     # warrenty clauses
     if arg_form_data['warranty'] == 'asis':
-        human_readable_license += '\t5. No Warranty is Provided'
+        human_readable_license += '\t5. No Warranty is Provided\n'
         license_text += render_clause('warranty-as-is.txt', arg_form_data)
     elif arg_form_data['warranty'] == 'security':
-        human_readable_license += '\t5. Critical Security fixes will be provided'
+        human_readable_license += '\t5. Critical Security fixes will be provided\n'
         license_text += render_clause('warranty-security-fixes.txt', arg_form_data)
     elif arg_form_data['warranty'] == 'bug':
-        human_readable_license += '\t5. Critical Bug fixes will be supported'
+        human_readable_license += '\t5. Critical Bug fixes will be supported\n'
         license_text += render_clause('warranty-bug-fixes.txt', arg_form_data)
+
+    # Innersource authorizing body
+    if arg_form_data['authbody'] == 'Other':
+        arg_form_data['authbody'] = arg_form_data['Authbody_name']
+    elif arg_form_data['authbody'] == 'ISC':
+        arg_form_data['authbody'] = 'Inner Source Committee' 
+    elif arg_form_data['authbody'] == 'OSPO':
+        arg_form_data['authbody'] = 'OSPO' 
+
+    human_readable_license += '\t6. All exceptions will esculated to ' + arg_form_data['authbody'] + '\n'
+    license_text += render_clause('authorizing-body.txt', arg_form_data)
 
     return license_text, human_readable_license

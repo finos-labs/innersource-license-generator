@@ -115,11 +115,15 @@ def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
         human_readable_license += "\t4. Distribution is allowed to this organization, subsidaries and contracted vendors\n"
         license_text += render_clause('boundary-org-subs-vends.txt', arg_form_data)
 
+    # warrenty clauses
     if arg_form_data['warranty'] == 'asis':
         human_readable_license += '\t5. No Warranty is Provided'
-        license_text += render_clause('warrenty-as-is.txt', arg_form_data)
-    elif arg_form_data['warranty'] == '\tX. A 30 day internal Warranty is provided':
-        human_readable_license += '\t5. A 30 day Warrant is Provided'
-        license_text += "Warranty: 30-day warranty\n"
+        license_text += render_clause('warranty-as-is.txt', arg_form_data)
+    elif arg_form_data['warranty'] == 'security':
+        human_readable_license += '\t5. Critical Security fixes will be provided'
+        license_text += render_clause('warranty-security-fixes.txt', arg_form_data)
+    elif arg_form_data['warranty'] == 'bug':
+        human_readable_license += '\t5. Critical Bug fixes will be supported'
+        license_text += render_clause('warranty-bug-fixes.txt', arg_form_data)
 
     return license_text, human_readable_license

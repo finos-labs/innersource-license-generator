@@ -1,5 +1,5 @@
 
-WARRENTY
+WARRANTY
 --------
 
 The software provided under this license is provided "as is," without any
@@ -8,3 +8,8 @@ warranties of merchantability, fitness for a particular purpose, and
 non-infringement. The licensor and contributors to the software shall not be
 liable for any claim, damages, or other liability arising out of or in
 connection with the software or the use or other dealings in the software.
+
+The core team of this innersource project will however work to fix all bugs 
+opened on the product whilst it remains a viable and published project in
+the owning organiztion
+

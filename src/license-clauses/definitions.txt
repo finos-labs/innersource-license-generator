@@ -14,8 +14,8 @@ licensed software or copyrighted works.
 of authorship, including software code, literary works, artistic creations, 
 and other intellectual property rights, as provided by applicable laws.
 
-1.4. "Copyright Holder" refers to the individual or entity that owns the 
-copyright to the licensed software or copyrighted works.
+1.4. "Copyright Holder" and "Owning Organization" refers to the oranizaitonal 
+entity that owns the copyright to the licensed software or copyrighted works.
 
 1.5. "Derivative Work" refers to a work based upon one or more preexisting 
 works, such as modifications, translations, adaptations, or any other form 
@@ -49,4 +49,7 @@ voting stock or similar ownership interest.
 1.12. "Partners" refers to entities that have a partnership, collaboration, 
 or similar formal relationship with the Licensee for the purpose of jointly 
 developing, using, or distributing the licensed software or copyrighted works.
+
+1.13 "Core team" refers to the author and the team responsible for maintaining
+this code in the owning organization
 

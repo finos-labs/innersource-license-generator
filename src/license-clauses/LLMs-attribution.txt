@@ -1,0 +1,8 @@
+
+LARGE LANGUAGE MODELS and GENERATIVE AI 
+---------------------------------------
+
+Processing of this source code by Large Language Models,
+Generative AIor similar code process tools to create derative 
+works is allowed provided attribution is provided in derivative works
+

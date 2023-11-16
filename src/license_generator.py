@@ -104,6 +104,18 @@ def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
         human_readable_license += "\t3. Redistribution through central project only \n"
         license_text += render_clause('dist-central.txt', arg_form_data)
 
+    # LLM access to create derived works
+    if arg_form_data['llm'] == 'LLM_noread':
+        human_readable_license += "\t3. GenAI/LLMs are not allowed to read this project\n"
+        license_text += render_clause('LLMs-no-allow.txt', arg_form_data)
+    elif arg_form_data['llm'] == 'LLM_attribution':
+        human_readable_license += "\t3. GenAI/LLMs are allowed to read project with attribution\n"
+        license_text += render_clause('LLMs-attribution.txt', arg_form_data)
+    elif arg_form_data['llm'] == 'LLM_allowread':
+        human_readable_license += "\t3. GenAI/LLMs are allowed to read without restriction\n"
+        license_text += render_clause('LLMs-allow.txt', arg_form_data)
+
+
     # boundary conditions
     if arg_form_data['boundary'] == 'orgonly':
         human_readable_license += "\t4. Distribution is allowed to this organization and employees only\n"

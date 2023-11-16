@@ -1,0 +1,8 @@
+
+LARGE LANGUAGE MODELS and GENERATIVE AI 
+---------------------------------------
+
+Process of the source code of this project by Large Language 
+Models, Generative AI or similar code process tools that generate 
+code through the anlysis of exisiting code is strictly prohibited
+

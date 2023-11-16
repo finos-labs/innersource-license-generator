@@ -57,6 +57,10 @@ def render_clause(template_file: str, context: Dict) -> str:
     return rendered_content
 
 
+
+
+
+
 def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
     """
     Generate the license text from provided form data
@@ -78,64 +82,65 @@ def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
 
     arg_form_data['scope'] = scope
 
-    human_readable_license += '\t3. The Scope of this license extends to the' + scope + "\n"
+    human_readable_license += '\t2. The Scope of this license extends to the' + scope + "\n"
     license_text += render_clause('scope.txt', arg_form_data)
+
+    # boundary conditions
+    if arg_form_data['boundary'] == 'orgonly':
+        human_readable_license += "\t3. Distribution is allowed to this organization and employees only\n"
+        license_text += render_clause('boundary-org.txt', arg_form_data)
+    elif arg_form_data['boundary'] == 'orgsubs':
+        human_readable_license += "\t3. Distribution is allowed to this organization and subsidaries only\n"
+        license_text += render_clause('boundary-org-subs.txt', arg_form_data)
+    elif arg_form_data['boundary'] == 'orgsubsvend':
+        human_readable_license += "\t3. Distribution is allowed to this organization, subsidaries and contracted vendors\n"
+        license_text += render_clause('boundary-org-subs-vends.txt', arg_form_data)
 
     # Attribution conditions
     if arg_form_data['attribution'] == 'noat':
-        human_readable_license += '\t2. No reference to maintainers\n'
+        human_readable_license += '\t4. No reference to maintainers\n'
         license_text += render_clause('attribution-none.txt', arg_form_data)
     elif arg_form_data['attribution'] == 'copyat':
-        human_readable_license += '\t2. Attribution is to be given to ' + arg_form_data[
+        human_readable_license += '\t4. Attribution is to be given to ' + arg_form_data[
             'copyright_holder'] + '\n'
         license_text += render_clause('attribution-authors.txt', arg_form_data)
     elif arg_form_data['attribution'] == 'orgat':
-        human_readable_license += '\t2. Attribution to this project in ' + arg_form_data['organization_name'] + '\n'
+        human_readable_license += '\t4. Attribution to this project in ' + arg_form_data['organization_name'] + '\n'
         license_text += render_clause('attribution-org-project.txt', arg_form_data)
 
     # Redistribution
     if arg_form_data['distribution'] == 'noredist':
-        human_readable_license += "\t3. No restribution is allowed\n"
+        human_readable_license += "\t5. No restribution is allowed\n"
         license_text += render_clause('dist-none.txt', arg_form_data)
     elif arg_form_data['distribution'] == 'allowredist':
-        human_readable_license += "\t3. Redistribution allowed\n"
+        human_readable_license += "\t5. Redistribution allowed\n"
         license_text += render_clause('dist-allow.txt', arg_form_data)
     elif arg_form_data['distribution'] == 'centralredist':
-        human_readable_license += "\t3. Redistribution through central project only \n"
+        human_readable_license += "\t5. Redistribution through central project only \n"
         license_text += render_clause('dist-central.txt', arg_form_data)
 
     # LLM access to create derived works
     if arg_form_data['llm'] == 'LLM_noread':
-        human_readable_license += "\t3. GenAI/LLMs are not allowed to read this project\n"
+        human_readable_license += "\t6. GenAI/LLMs are not allowed to read this project\n"
         license_text += render_clause('LLMs-no-allow.txt', arg_form_data)
     elif arg_form_data['llm'] == 'LLM_attribution':
-        human_readable_license += "\t3. GenAI/LLMs are allowed to read project with attribution\n"
+        human_readable_license += "\t6. GenAI/LLMs are allowed to read project with attribution\n"
         license_text += render_clause('LLMs-attribution.txt', arg_form_data)
     elif arg_form_data['llm'] == 'LLM_allowread':
-        human_readable_license += "\t3. GenAI/LLMs are allowed to read without restriction\n"
+        human_readable_license += "\t6. GenAI/LLMs are allowed to read without restriction\n"
         license_text += render_clause('LLMs-allow.txt', arg_form_data)
 
 
-    # boundary conditions
-    if arg_form_data['boundary'] == 'orgonly':
-        human_readable_license += "\t4. Distribution is allowed to this organization and employees only\n"
-        license_text += render_clause('boundary-org.txt', arg_form_data)
-    elif arg_form_data['boundary'] == 'orgsubs':
-        human_readable_license += "\t4. Distribution is allowed to this organization and subsidaries only\n"
-        license_text += render_clause('boundary-org-subs.txt', arg_form_data)
-    elif arg_form_data['boundary'] == 'orgsubsvend':
-        human_readable_license += "\t4. Distribution is allowed to this organization, subsidaries and contracted vendors\n"
-        license_text += render_clause('boundary-org-subs-vends.txt', arg_form_data)
 
     # warrenty clauses
     if arg_form_data['warranty'] == 'asis':
-        human_readable_license += '\t5. No Warranty is Provided\n'
+        human_readable_license += '\t7. No Warranty is Provided\n'
         license_text += render_clause('warranty-as-is.txt', arg_form_data)
     elif arg_form_data['warranty'] == 'security':
-        human_readable_license += '\t5. Critical Security fixes will be provided\n'
+        human_readable_license += '\t7. Critical Security fixes will be provided\n'
         license_text += render_clause('warranty-security-fixes.txt', arg_form_data)
     elif arg_form_data['warranty'] == 'bug':
-        human_readable_license += '\t5. Critical Bug fixes will be supported\n'
+        human_readable_license += '\t7. Critical Bug fixes will be supported\n'
         license_text += render_clause('warranty-bug-fixes.txt', arg_form_data)
 
     # Innersource authorizing body
@@ -146,7 +151,7 @@ def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
     elif arg_form_data['authbody'] == 'OSPO':
         arg_form_data['authbody'] = 'OSPO' 
 
-    human_readable_license += '\t6. All exceptions will esculated to ' + arg_form_data['authbody'] + '\n'
+    human_readable_license += '\t8. All exceptions will esculated to ' + arg_form_data['authbody'] + '\n'
     license_text += render_clause('authorizing-body.txt', arg_form_data)
 
     return license_text, human_readable_license

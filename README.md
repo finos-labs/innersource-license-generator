@@ -1,23 +1,26 @@
+# InnerSource Software License Genrator
+
 ## Disclaimer
 
-The project is work in progress. It is not recommended for use
-
+The project is work in progress. It is not recommended for use.
 
 ## To run
 
-Create new virtual environment.
+Create a new virtual environment.
+
 Install dependencies:  
 
-    `pip install -r requeirements.txt` 
+    pip install -r requirements.txt
 
 Run:
 
-    `python app.py`
+    python app.py
 
 ## Testing
+
 In virtual environment install test dependencies:
 
-    `pip install -r test_requirements.txt`
+    pip install -r test_requirements.txt
 
 Run:
 

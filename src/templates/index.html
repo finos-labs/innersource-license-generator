@@ -9,12 +9,12 @@
     <h1>InnerSource License Generator</h1>
 
     <form action="/generate_license" method="POST">
-        <h2>Organization and Copyright holders Details</h2>
+        <h2>Organization Details</h2>
         <p>The Legal organization name represented by project team or employee</p>
         <input type="text" name="organization_name" style="width: 350px; background-color: lightgrey;" required>
 
-        <h2>Authors Name</h2>
-        <p>The name of the owner of this inner source project</p>
+        <h2>Author or Maintaining Core Team</h2>
+        <p>The name of the Author, Maintainers or Core team of this InnerSource project</p>
         <input type="text" name="copyright_holder" style="width: 350px; background-color: lightgrey;" required>
         <br/>
 
@@ -35,7 +35,7 @@
             <label><input type="radio" name="boundary" value="orgsubsvend" required>  The Organiztion, Subsidaries and Vendors</label>
         </div>
 
-        <h2>Territory</h2>
+        <h2>Territory</h2> 
         <p>What Territorial Jurasdictions are within the InnerSource boundary </p>
         <div class="radio-group">
             <label><input type="checkbox" name="territory[]" value="US"> US</label>
@@ -50,8 +50,8 @@
         <p>Who needs to be provided attribution and recognition for the original work?</p>
         <div class="radio-group">
             <label><input type="radio" name="attribution" value="noat" required> No attribution</label>
-            <label><input type="radio" name="attribution" value="copyat" required> Attribution to Copyright Holder</label>
-            <label><input type="radio" name="attribution" value="orgat" required> Attribution to Organization</label>
+            <label><input type="radio" name="attribution" value="copyat" required> Attribution named Authors</label>
+            <label><input type="radio" name="attribution" value="orgat" required> This Project in Organization</label>
         </div>
 
         <h2>Distribution of Derivative Work</h2>

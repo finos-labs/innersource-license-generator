@@ -1,0 +1,14 @@
+
+ATTRIBUTION
+-----------
+
+Attribution Requirement: The Licensee agrees to include attribution to 
+{{copyright_holder}}. Attribution shall be prominently displayed and clearly visible 
+to users of the software or the deployed work. 
+
+Codebase Attribution: In the codebase, the Licensee shall include
+a notice that identifies the author(s) of the software and provides a reference
+to the original source of the licensed software. This notice shall be included
+in the relevant source code files or in a NOTICE file included with the software
+distribution.
+

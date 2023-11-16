@@ -83,15 +83,15 @@ def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
 
     # Attribution conditions
     if arg_form_data['attribution'] == 'noat':
-        human_readable_license += '\t2. No Attribution is given to author\n'
+        human_readable_license += '\t2. No reference to maintainers\n'
         license_text += render_clause('attribution-none.txt', arg_form_data)
     elif arg_form_data['attribution'] == 'copyat':
-        human_readable_license += '\t2. Attribution is to be givem to ' + arg_form_data[
-            'copyright_holder'] + ' on redistribution\n'
-        license_text += render_clause('attribution-copyright-holder.txt', arg_form_data)
+        human_readable_license += '\t2. Attribution is to be given to ' + arg_form_data[
+            'copyright_holder'] + '\n'
+        license_text += render_clause('attribution-authors.txt', arg_form_data)
     elif arg_form_data['attribution'] == 'orgat':
-        human_readable_license += '\t2. Attribution only to the organization ' + arg_form_data['organization_name']
-        license_text += "Attribution: to Organiztion\n"
+        human_readable_license += '\t2. Attribution to this project in ' + arg_form_data['organization_name'] + '\n'
+        license_text += render_clause('attribution-org-project.txt', arg_form_data)
 
     # Redistribution
     if arg_form_data['distribution'] == 'noredist':

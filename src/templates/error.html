@@ -1,12 +1,26 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Input Error</title>
-  </head>
-  <body>
-    <h1>Error</h1>
-    <p>We are sorry but there was an error:</p>
-    <p> {{message}}</p>
-    <p><a href="/">Back to homepage</a></p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error — InnerSource License Generator</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="page-header">
+            <h1>InnerSource License Generator</h1>
+        </header>
+        <main>
+            <div class="error-box">
+                <h2>Something went wrong</h2>
+                <p>{{ message }}</p>
+                <a href="/" class="back-link">&#8592; Back to form</a>
+            </div>
+        </main>
+        <footer class="page-footer">
+            <p>InnerSource License Generator &mdash; always obtain legal review before use.</p>
+        </footer>
+    </div>
+</body>
 </html>

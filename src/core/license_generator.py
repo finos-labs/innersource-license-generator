@@ -1,11 +1,12 @@
 import os
 import pathlib
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 from jinja2 import Template
 
 
-THIS_FOLDER = pathlib.Path().resolve()
-LICENSE_CLAUSES_FOLDER = THIS_FOLDER.joinpath("license-clauses")  # templates folder relative to this file
+# Get the directory containing this file, then navigate to src/license-clauses
+THIS_FILE_DIR = pathlib.Path(__file__).parent.parent  # Goes from core/ to src/
+LICENSE_CLAUSES_FOLDER = THIS_FILE_DIR.joinpath("license-clauses")  # templates folder
 REQUIRED_FIELDS = ('attribution', 'distribution', 'warranty', 'copyright_holder',
                    'organization_name', 'scope', 'boundary')
 MAX_LENGTH = 1024
@@ -36,7 +37,6 @@ def check_missing_fields(form: Dict) -> List[str]:
         temp = form.get(key)
         if temp is None:
             missing_keys.append(key)
-            print(key)
     return missing_keys
 
 
@@ -67,6 +67,9 @@ def generate_license_text(arg_form_data: Dict) -> Tuple[str, str]:
     :param arg_form_data: dictionary that contains form data
     :return: tuple with two strings - license and human-readable license
     """
+
+    # Alias so both old template var name {{organization}} and new {{organization_name}} resolve
+    arg_form_data['organization'] = arg_form_data['organization_name']
 
     license_text = "SOFTWARE LICENSE AGREEMENT\n\n"
 

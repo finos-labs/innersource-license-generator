@@ -40,7 +40,7 @@ To sign off, add the following trailer to every commit message using `git commit
 Signed-off-by: Your Full Name <your.email@example.com>
 ```
 
-This will get checked by FINOS repos an block submission if not done
+This will get checked by FINOS repos an block submission if not done.
 
 The full DCO text is available at [developercertificate.org](https://developercertificate.org/).
 

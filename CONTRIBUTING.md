@@ -25,19 +25,22 @@ This project is governed by the [FINOS Community Code of Conduct](CODE_OF_CONDUC
 All contributors are expected to uphold it. Please report unacceptable behaviour to
 [conduct@finos.org](mailto:conduct@finos.org).
 
+
 ---
 
 ## Developer Certificate of Origin (DCO)
 
 All contributions to this project must be accompanied by a **Developer Certificate of Origin**
 sign-off. This is a Linux Foundation requirement that certifies you have the right to submit
-the contribution under the project's license.
+the contribution under the project's license. 
 
 To sign off, add the following trailer to every commit message using `git commit -s`:
 
 ```
 Signed-off-by: Your Full Name <your.email@example.com>
 ```
+
+This will get checked by FINOS repos an block submission if not done
 
 The full DCO text is available at [developercertificate.org](https://developercertificate.org/).
 

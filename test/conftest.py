@@ -1,26 +1,42 @@
+import subprocess
+import time
+
+import httpx
 import pytest
-from src.flask_app import app
+from fastapi.testclient import TestClient
+
+from src.api.main import app
 
 
 @pytest.fixture()
 def test_client():
-    app.config.update({
-        "TESTING": True,
-    })
-
-    with app.test_client() as testing_client:
-        # Establish an application context
-        with app.app_context():
-            yield testing_client  # this is where the testing happens!
-
-    # clean up / reset resources here
+    """FastAPI in-process test client (unit / API-logic tests)"""
+    with TestClient(app, raise_server_exceptions=True) as client:
+        yield client
 
 
-@pytest.fixture()
-def client(app):
-    return app.test_client()
-
-
-@pytest.fixture()
-def runner(app):
-    return app.test_cli_runner()
+@pytest.fixture(scope="module")
+def live_server():
+    """
+    Starts a real uvicorn process on port 18765 for physical download tests.
+    Uses the same app code a browser talks to — real TCP, real cookie jar.
+    """
+    proc = subprocess.Popen(
+        [
+            "python", "-m", "uvicorn", "src.api.main:app",
+            "--port", "18765", "--log-level", "error",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    base = "http://localhost:18765"
+    # Poll /health until the server is ready (up to 5 seconds)
+    for _ in range(20):
+        try:
+            httpx.get(f"{base}/health", timeout=0.5)
+            break
+        except Exception:
+            time.sleep(0.25)
+    yield base
+    proc.terminate()
+    proc.wait()

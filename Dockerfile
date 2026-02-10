@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.8-slim-buster
+FROM python:3.11-slim
 
 # Set the working directory
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the port on which the application will run
-EXPOSE 5000
+EXPOSE 8000
 
-# Start the Flask application
-CMD [ "python", "app.py" ]
+# Start the FastAPI application with uvicorn
+CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]

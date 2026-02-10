@@ -1,89 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generated InnerSource License</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f6f6f6;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin: 30px 0;
-        }
-
-        .license-container {
-            max-width: 650px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        p {
-            margin-bottom: 10px;
-        }
-
-        .download-checkbox {
-            margin-bottom: 10px;
-        }
-
-        .download-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-    </style>
-    
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script src="https://unpkg.com/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
 </head>
 <body>
-    <div class="license-container">
-        <h1>Generated InnerSource License</h1>
-
-        <p>You selected the following clauses for your InnerSource License</p>
-        <pre>{{ clauses_text}}</pre>
-
-        <p>Please review the generated License.MD file below for the above 
-            clauses. It required to have a further legal review before 
-            applying this license within your organization.
-        </p>
-        <br>
-        <br>
-
-        <div>
-            <input type="checkbox" id="download-checkbox">
-            <label for="download-checkbox">I agree that the license generated has to be reviewed and legally reviewed before use. 
-                I do not hold FinOS liable for any damages as a result of the use of this license</label>
-        </div>
-
-        <br>
-
-        <div>
-            <button class="download-button" onclick="downloadLicense()">Download License.MD</button>
-        </div>
-
-
-        <div class="license-container">
-            <pre id="license-text">{{ license_text }}</pre>
-        </div>
-
-    
+    <div class="page-wrapper">
+        <header class="page-header">
+            <h1>InnerSource License Generator</h1>
+        </header>
+        <main>
+            {% include "components/license_result.html" %}
+        </main>
+        <footer class="page-footer">
+            <p>InnerSource License Generator &mdash; always obtain legal review before use.</p>
+        </footer>
     </div>
-
-    <script>
-        function downloadLicense() {
-            if (document.getElementById('download-checkbox').checked) {
-                window.location.href = '/download';
-            }
-        }
-    </script>
 </body>
 </html>

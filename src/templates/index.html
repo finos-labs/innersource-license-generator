@@ -1,95 +1,262 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnerSource Software License Generator</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <!-- HTMX for AJAX form submission without full page reloads -->
+    <script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
+    <!-- Alpine.js for lightweight client-side interactivity -->
+    <script src="https://unpkg.com/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
 </head>
 <body>
-   
-    <h1>InnerSource License Generator</h1>
+    <div class="page-wrapper">
+        <header class="page-header">
+            <h1>InnerSource License Generator</h1>
+            <p class="page-subtitle">Generate a customized InnerSource software license for your organization</p>
+        </header>
 
-    <form action="/generate_license" method="POST">
-        <h2>Organization Details</h2>
-        <p>The Legal organization name represented by project team or employee</p>
-        <input type="text" name="organization_name" style="width: 350px; background-color: lightgrey;" required>
+        <main>
+            <form
+                action="/generate_license"
+                method="POST"
+                hx-post="/generate_license"
+                hx-target="#result-section"
+                hx-swap="innerHTML"
+                hx-indicator="#loading-indicator"
+                hx-on::after-request="document.getElementById('result-section').scrollIntoView({behavior:'smooth'})"
+            >
+                <!-- Section 1: Organization Details -->
+                <section class="form-section">
+                    <h2>Organization Details</h2>
+                    <p class="field-hint">The legal organization name represented by the project team or employee</p>
+                    <label for="organization_name" class="field-label">Legal Organization Name <span class="required">*</span></label>
+                    <input
+                        type="text"
+                        id="organization_name"
+                        name="organization_name"
+                        class="text-input"
+                        placeholder="e.g. Acme Corporation"
+                        maxlength="1024"
+                        required
+                    >
+                </section>
 
-        <h2>Author or Maintaining Core Team</h2>
-        <p>The name of the Author, Maintainers or Core team of this InnerSource project</p>
-        <input type="text" name="copyright_holder" style="width: 350px; background-color: lightgrey;" required>
-        <br/>
+                <!-- Section 2: Internal Owner -->
+                <section class="form-section">
+                    <h2>Internal Owner or Maintaining Core Team</h2>
+                    <p class="field-hint">The name of the owner or maintaining core team of this InnerSource project</p>
+                    <label for="copyright_holder" class="field-label">Copyright Holder / Core Team <span class="required">*</span></label>
+                    <input
+                        type="text"
+                        id="copyright_holder"
+                        name="copyright_holder"
+                        class="text-input"
+                        placeholder="e.g. Platform Engineering Team"
+                        maxlength="1024"
+                        required
+                    >
+                </section>
 
-        <h2>Scope of Protection</h2>
-        <p>What aspect of the InnerSource project needs to be protected</p>
-        <div class="radio-group">
-            <label><input type="checkbox" name="scope[]" value="code"> Code</label>
-            <label><input type="checkbox" name="scope[]" value="docs"> Documentation</label>
-            <label><input type="checkbox" name="scope[]" value="data"> Data</label>
-            <label><input type="checkbox" name="scope[]" value="devops"> All Artifacts</label>
-        </div>
+                <!-- Section 3: Scope -->
+                <section class="form-section">
+                    <h2>Scope of Protection</h2>
+                    <p class="field-hint">What aspects of the InnerSource project need to be protected?</p>
+                    <div class="checkbox-group">
+                        <label class="option-label">
+                            <input type="checkbox" name="scope" value="code">
+                            <span>Code</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="checkbox" name="scope" value="docs">
+                            <span>Documentation</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="checkbox" name="scope" value="data">
+                            <span>Data</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="checkbox" name="scope" value="devops">
+                            <span>All Artifacts</span>
+                        </label>
+                    </div>
+                </section>
 
-        <h2>InnerSource Boundary</h2>
-        <p>You can only distribute this work within the InnerSource boundary that reprsents</p>
-        <div class="radio-group">
-            <label><input type="radio" name="boundary" value="orgonly" required> Only the Organization and direct employees</label>
-            <label><input type="radio" name="boundary" value="orgsubs" required> Only Organization and Subsidaries</label>
-            <label><input type="radio" name="boundary" value="orgsubsvend" required>  The Organiztion, Subsidaries and Vendors</label>
-        </div>
+                <!-- Section 4: Boundary -->
+                <section class="form-section">
+                    <h2>InnerSource Boundary</h2>
+                    <p class="field-hint">You can only distribute this work within the InnerSource boundary that represents:</p>
+                    <div class="radio-group">
+                        <label class="option-label">
+                            <input type="radio" name="boundary" value="orgonly" required>
+                            <span>Only the Organization and direct employees</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="boundary" value="orgsubs" required>
+                            <span>Only Organization and Subsidiaries</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="boundary" value="orgsubsvend" required>
+                            <span>The Organization, Subsidiaries and Vendors</span>
+                        </label>
+                    </div>
+                </section>
 
-        <h2>Territory</h2> 
-        <p>What Territorial Jurasdictions are within the InnerSource boundary </p>
-        <div class="radio-group">
-            <label><input type="checkbox" name="territory[]" value="US"> US</label>
-            <label><input type="checkbox" name="territory[]" value="UK"> UK</label>
-            <label><input type="checkbox" name="territory[]" value="EU"> EU</label>
-            <label><input type="checkbox" name="territory[]" value="Other"> Other</label>
-            <input type="text" name="other_territory">        
-        </div>
+                <!-- Section 5: Territory (Alpine.js for conditional input) -->
+                <section class="form-section" x-data="{ showOtherTerritory: false }">
+                    <h2>Territory</h2>
+                    <p class="field-hint">Which territorial jurisdictions are within the InnerSource boundary?</p>
+                    <div class="checkbox-group">
+                        <label class="option-label">
+                            <input type="checkbox" name="territory" value="US">
+                            <span>United States</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="checkbox" name="territory" value="UK">
+                            <span>United Kingdom</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="checkbox" name="territory" value="EU">
+                            <span>European Union</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="checkbox" name="territory" value="Other" @change="showOtherTerritory = $event.target.checked">
+                            <span>Other</span>
+                        </label>
+                    </div>
+                    <div x-show="showOtherTerritory" x-transition class="conditional-input">
+                        <label for="other_territory" class="field-label">Specify other territory:</label>
+                        <input type="text" id="other_territory" name="other_territory" class="text-input" placeholder="e.g. Canada, Australia" maxlength="1024">
+                    </div>
+                </section>
 
+                <!-- Section 6: Attribution -->
+                <section class="form-section">
+                    <h2>Attribution</h2>
+                    <p class="field-hint">Who needs to be provided attribution and recognition for the original work?</p>
+                    <div class="radio-group">
+                        <label class="option-label">
+                            <input type="radio" name="attribution" value="noat" required>
+                            <span>No attribution required</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="attribution" value="copyat" required>
+                            <span>Attribution to named authors</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="attribution" value="orgat" required>
+                            <span>Attribution to this project in the organization</span>
+                        </label>
+                    </div>
+                </section>
 
-        <h2>Attribution</h2>
-        <p>Who needs to be provided attribution and recognition for the original work?</p>
-        <div class="radio-group">
-            <label><input type="radio" name="attribution" value="noat" required> No attribution</label>
-            <label><input type="radio" name="attribution" value="copyat" required> Attribution named Authors</label>
-            <label><input type="radio" name="attribution" value="orgat" required> This Project in Organization</label>
-        </div>
+                <!-- Section 7: Distribution -->
+                <section class="form-section">
+                    <h2>Distribution of Derivative Work</h2>
+                    <p class="field-hint">Are you permitted to further distribute the source code after modification?</p>
+                    <div class="radio-group">
+                        <label class="option-label">
+                            <input type="radio" name="distribution" value="noredist" required>
+                            <span>No redistribution</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="distribution" value="centralredist" required>
+                            <span>Redistribution only through main project</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="distribution" value="sharealredist" required>
+                            <span>Share-alike redistribution allowed</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="distribution" value="allowredist" required>
+                            <span>Redistribution allowed</span>
+                        </label>
+                    </div>
+                </section>
 
-        <h2>Distribution of Derivative Work</h2>
-        <p>Are you permitted to further distribute the sourcecode after modification?</p>
-        <div class="radio-group">
-            <label><input type="radio" name="distribution" value="noredist" required> No Restribution</label>
-            <label><input type="radio" name="distribution" value="centralredist" required> Redistribution only through main project</label>
-            <label><input type="radio" name="distribution" value="sharealredist" required> Share-Alike Redistribution Allowed</label>
-            <label><input type="radio" name="distribution" value="allowredist" required> Redistribution Allowed</label>
-        </div>
+                <!-- Section 8: LLM Access -->
+                <section class="form-section">
+                    <h2>LLM / GenAI Access</h2>
+                    <p class="field-hint">Are Large Language Model systems allowed to access this InnerSource project to produce derived code?</p>
+                    <div class="radio-group">
+                        <label class="option-label">
+                            <input type="radio" name="llm" value="LLM_noread" required>
+                            <span>Not allowed</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="llm" value="LLM_attribution" required>
+                            <span>Internal use with attribution required</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="llm" value="LLM_allowread" required>
+                            <span>Internal use allowed</span>
+                        </label>
+                    </div>
+                </section>
 
-        <h2>InnerSource Authorizing Body</h2>
-        <p>Which body will handle exceptions and approvals to this InnerSource project?</p>
-        <div class="radio-group">
-            <label><input type="radio" name="authbody" value="OSPO" required> OSPO</label>
-            <label><input type="radio" name="authbody" value="ISC" required> InnerSource Committee</label>
-            <label><input type="radio" name="authbody" value="Other" required> Other</label>
-            <input type="text" name="Authbody_name">        
-        </div>
+                <!-- Section 9: Authorizing Body (Alpine.js for conditional input) -->
+                <section class="form-section" x-data="{ showOtherAuthbody: false }">
+                    <h2>InnerSource Authorizing Body</h2>
+                    <p class="field-hint">Which body will handle exceptions and approvals for this InnerSource project?</p>
+                    <div class="radio-group">
+                        <label class="option-label">
+                            <input type="radio" name="authbody" value="OSPO" required @change="showOtherAuthbody = false">
+                            <span>OSPO</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="authbody" value="ISC" required @change="showOtherAuthbody = false">
+                            <span>InnerSource Committee</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="authbody" value="Other" required @change="showOtherAuthbody = true">
+                            <span>Other</span>
+                        </label>
+                    </div>
+                    <div x-show="showOtherAuthbody" x-transition class="conditional-input">
+                        <label for="Authbody_name" class="field-label">Specify authorizing body:</label>
+                        <input type="text" id="Authbody_name" name="Authbody_name" class="text-input" placeholder="e.g. Legal & Compliance Team" maxlength="1024">
+                    </div>
+                </section>
 
-        <h2>LLM Access</h2>
-        <p>Are Large Language Model Systems Allowed to Access this InnerSource project</p>
-        <div class="radio-group">
-            <label><input type="radio" name="llm" value="LLM_noread" required> Not allowed </label>
-            <label><input type="radio" name="llm" value="LLM_attribution" required> Internal with Attribution</label>
-            <label><input type="radio" name="llm" value="LLM_allowread" required> Internally Allowed</label>
-        </div>
+                <!-- Section 10: Warranty -->
+                <section class="form-section">
+                    <h2>Warranty and Support</h2>
+                    <p class="field-hint">What warranty or support will users receive by using this product?</p>
+                    <div class="radio-group">
+                        <label class="option-label">
+                            <input type="radio" name="warranty" value="asis" required>
+                            <span>As-is — no support</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="warranty" value="security" required>
+                            <span>Critical security fixes only</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="warranty" value="bug" required>
+                            <span>Bug fixes supported</span>
+                        </label>
+                    </div>
+                </section>
 
-        <h2>Warranty and Support</h2>
-        <p>What warranty or support will they get by using the product?</p>
-        <div class="radio-group">
-            <label><input type="radio" name="warranty" value="asis" required> As-Is No Support</label>
-            <label><input type="radio" name="warranty" value="security" required> Security Fixes</label>
-            <label><input type="radio" name="warranty" value="bug" required> Bug Fixes</label>
-        </div>
+                <!-- Submit area -->
+                <div class="submit-area">
+                    <button type="submit" class="submit-button">
+                        Generate License
+                    </button>
+                    <span id="loading-indicator" class="htmx-indicator loading-text">
+                        Generating license&hellip;
+                    </span>
+                </div>
+            </form>
 
-        <br><br>
-        <input type="submit" value="Generate License">
-    </form>
+            <!-- Results injected here by HTMX (or visible after non-JS form submission redirect) -->
+            <div id="result-section" class="result-section"></div>
+        </main>
+
+        <footer class="page-footer">
+            <p>InnerSource License Generator &mdash; always obtain legal review before use.</p>
+        </footer>
+    </div>
 </body>
 </html>

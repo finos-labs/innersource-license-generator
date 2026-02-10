@@ -295,6 +295,20 @@ h2 {
     gap: 10px;
 }
 
+/* Download forms wrap each button — keep them inline so the row layout is preserved */
+form:has(.dl-btn) {
+    display: inline;
+}
+
+/* Reset browser button defaults so <button>.dl-btn looks identical to <a>.dl-btn.
+   background is intentionally NOT reset here — the colour classes (.dl-btn--md etc.)
+   supply it; resetting to 'none' would win on specificity and make buttons invisible. */
+button.dl-btn {
+    border: none;
+    font-family: inherit;
+    line-height: inherit;
+}
+
 /* Base button */
 .dl-btn {
     display: inline-flex;

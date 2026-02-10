@@ -186,6 +186,79 @@ async def download_docx(request: Request):
     )
 
 
+# ---------------------------------------------------------------------------
+# POST download endpoints — license_text passed in form body, no session needed.
+# Used by the browser UI (hidden form fields); GET variants kept for API compat.
+# ---------------------------------------------------------------------------
+
+@router.post("/download/md")
+async def download_md_post(license_text: str = Form(...)):
+    """Browser POST download: Markdown. Receives license_text in form body."""
+    return StreamingResponse(
+        io.BytesIO(license_text.encode('utf-8')),
+        media_type="text/markdown",
+        headers={"Content-Disposition": "attachment; filename=License.md"}
+    )
+
+
+@router.post("/download/pdf")
+async def download_pdf_post(license_text: str = Form(...)):
+    """Browser POST download: PDF. Receives license_text in form body."""
+    from fpdf import FPDF
+    from fpdf.enums import XPos, YPos
+
+    pdf = FPDF()
+    pdf.set_auto_page_break(auto=True, margin=20)
+    pdf.add_page()
+    pdf.set_left_margin(20)
+    pdf.set_right_margin(20)
+    effective_width = pdf.w - pdf.l_margin - pdf.r_margin
+
+    pdf.set_font("Helvetica", style="B", size=14)
+    pdf.cell(effective_width, 10, "SOFTWARE LICENSE AGREEMENT",
+             new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
+    pdf.ln(4)
+    pdf.set_font("Helvetica", size=9)
+
+    body_lines = license_text.split('\n')
+    start = 1 if body_lines and body_lines[0].strip() == "SOFTWARE LICENSE AGREEMENT" else 0
+    pdf.multi_cell(effective_width, 5, '\n'.join(body_lines[start:]))
+
+    return StreamingResponse(
+        io.BytesIO(pdf.output()),
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=License.pdf"}
+    )
+
+
+@router.post("/download/docx")
+async def download_docx_post(license_text: str = Form(...)):
+    """Browser POST download: Word. Receives license_text in form body."""
+    from docx import Document
+    from docx.shared import Pt
+
+    doc = Document()
+    title = doc.add_heading("SOFTWARE LICENSE AGREEMENT", level=0)
+    title.alignment = 1  # center
+
+    lines = license_text.split('\n')
+    start = 1 if lines and lines[0].strip() == "SOFTWARE LICENSE AGREEMENT" else 0
+    for line in lines[start:]:
+        para = doc.add_paragraph(line)
+        if para.runs:
+            para.runs[0].font.size = Pt(10)
+
+    buf = io.BytesIO()
+    doc.save(buf)
+    buf.seek(0)
+
+    return StreamingResponse(
+        buf,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": "attachment; filename=License.docx"}
+    )
+
+
 # JSON API endpoint for programmatic access
 @router.post("/api/generate", response_model=LicenseResponse)
 async def api_generate_license(license_req: LicenseRequest):
